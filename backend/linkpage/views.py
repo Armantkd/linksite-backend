@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from linkpage.models import *
-
+from django.db.models.functions import Concat
 
 # Create your views here.
 
@@ -11,7 +11,6 @@ def home(request):
 
     if query:
         linkset = linkset.filter(creator__name__icontains = query)
-    
     paginator = Paginator(linkset, 15)
     page = request.GET.get('page')
     links = paginator.get_page(page)
